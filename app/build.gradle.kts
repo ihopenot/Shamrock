@@ -61,9 +61,6 @@ android {
     productFlavors {
         create("app") {
             dimension = "mode"
-            ndk {
-                abiFilters.add("arm64-v8a")
-            }
         }
     }
 
