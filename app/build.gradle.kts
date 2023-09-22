@@ -112,32 +112,7 @@ android {
         }
     }
 
-    configureAppSigningConfigsForRelease(project)
 }
-
-fun configureAppSigningConfigsForRelease(project: Project) {
-    val keystorePath: String? = System.getenv("KEYSTORE_PATH")
-    if (keystorePath.isNullOrBlank()) {
-        return
-    }
-    project.configure<ApplicationExtension> {
-        signingConfigs {
-            create("release") {
-                storeFile = file(System.getenv("KEYSTORE_PATH"))
-                storePassword = System.getenv("KEYSTORE_PASSWORD")
-                keyAlias = System.getenv("KEY_ALIAS")
-                keyPassword = System.getenv("KEY_PASSWORD")
-                enableV2Signing = true
-            }
-        }
-        buildTypes {
-            release {
-                signingConfig = signingConfigs.findByName("release")
-            }
-        }
-    }
-}
-
 dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
